@@ -53,19 +53,18 @@ from scipy import sparse, stats
 # In[3]:
 
 
-DATA_DIR = '../dat/raw/Webscope_R3'
+DATA_DIR = 'dat/raw/Webscope_R3/'
 
 
 # In[4]:
 
 
-OUT_DATA_DIR = '../dat/proc/R3_sg'
+OUT_DATA_DIR = 'dat/proc/R3_sg/'
 
 
 # # R3
 
 # In[5]:
-
 
 raw_data = pd.read_csv(os.path.join(DATA_DIR, 'ydata-ymusic-rating-study-v1_0-train.txt'), sep="\t", header=None, 
                        names=['userId', 'songId', 'rating'],engine="python")
@@ -77,7 +76,6 @@ test_data = pd.read_csv(os.path.join(DATA_DIR, 'ydata-ymusic-rating-study-v1_0-t
 
 
 raw_data.head(), raw_data.shape
-
 
 # In[7]:
 
@@ -260,8 +258,9 @@ print(len(rand_test_plays_tr), len(rand_test_plays_te))
 def numerize(tp):
     uid = list(map(lambda x: user2id[x], tp['userId']))
     sid = list(map(lambda x: song2id[x], tp['songId']))
-    tp.loc[:, 'uid'] = uid
-    tp.loc[:, 'sid'] = sid
+    tp = tp.copy()
+    tp['uid'] = uid
+    tp['sid'] = sid
     return tp[['uid', 'sid', 'rating']]
 
 

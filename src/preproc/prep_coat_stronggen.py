@@ -270,8 +270,9 @@ print(len(rand_test_plays_tr), len(rand_test_plays_te))
 def numerize(tp):
     uid = list(map(lambda x: user2id[x], tp['userId']))
     sid = list(map(lambda x: song2id[x], tp['songId']))
-    tp.loc[:, 'uid'] = uid
-    tp.loc[:, 'sid'] = sid
+    tp = tp.copy()
+    tp['uid'] = uid
+    tp['sid'] = sid
     return tp[['uid', 'sid', 'rating']]
 
 

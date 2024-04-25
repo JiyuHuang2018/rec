@@ -53,13 +53,13 @@ from scipy import sparse, stats
 # In[3]:
 
 
-DATA_DIR = 'F:/rec/causal-recsys-public/dat/raw/coat/'
+DATA_DIR = 'dat/raw/coat/'
 
 
 # In[4]:
 
 
-OUT_DATA_DIR = 'F:/rec/causal-recsys-public/dat/proc/coat_wg/'
+OUT_DATA_DIR = 'dat/proc/coat_wg/'
 
 
 # ## coat
@@ -168,7 +168,7 @@ n_users, n_items
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((uid, i) for (i, uid) in enumerate(unique_uid))
 
-
+print(user2id)
 # In[17]:
 
 
@@ -242,7 +242,7 @@ def move_to_fill(part_data_1, part_data_2, unique_id, key):
             left_id.append(_id)
             
     move_idx = part_data_2[key].isin(left_id)
-    part_data_1 = part_data_1.append(part_data_2[move_idx])
+    part_data_1 = part_data_1._append(part_data_2[move_idx])
     part_data_2 = part_data_2[~move_idx]
     return part_data_1, part_data_2
 

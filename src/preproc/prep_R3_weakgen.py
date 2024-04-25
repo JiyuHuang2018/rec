@@ -53,13 +53,13 @@ from scipy import sparse, stats
 # In[3]:
 
 
-DATA_DIR = '../dat/raw/Webscope_R3'
+DATA_DIR = 'dat/raw/Webscope_R3/'
 
 
 # In[4]:
 
 
-OUT_DATA_DIR = '../dat/proc/R3_wg'
+OUT_DATA_DIR = 'dat/proc/R3_wg/'
 
 
 # ## R3
@@ -77,7 +77,6 @@ test_data = pd.read_csv(os.path.join(DATA_DIR, 'ydata-ymusic-rating-study-v1_0-t
 
 
 tr_vd_data.head(), tr_vd_data.shape
-
 
 # In[7]:
 
@@ -135,9 +134,8 @@ item_popularity = get_count(tr_vd_data, 'songId')
 # In[11]:
 
 
-unique_uid = user_activity.index
-unique_sid = item_popularity.index
-
+unique_uid = user_activity.index 
+unique_sid = item_popularity.index 
 
 # In[12]:
 
@@ -157,7 +155,6 @@ n_users, n_items
 
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((uid, i) for (i, uid) in enumerate(unique_uid))
-
 
 # In[15]:
 
@@ -186,8 +183,8 @@ with open(os.path.join(OUT_DATA_DIR, 'unique_sid.txt'), 'w') as f:
 
 
 def numerize(tp):
-    uid = list(map(lambda x: user2id[x], tp['userId']))
-    sid = list(map(lambda x: song2id[x], tp['songId']))
+    uid = list(map(lambda x: user2id[x-1], tp['userId']))
+    sid = list(map(lambda x: song2id[x-1], tp['songId']))
     tp.loc[:, 'uid'] = uid
     tp.loc[:, 'sid'] = sid
     return tp[['uid', 'sid', 'rating']]
@@ -232,7 +229,8 @@ def move_to_fill(part_data_1, part_data_2, unique_id, key):
             left_id.append(_id)
             
     move_idx = part_data_2[key].isin(left_id)
-    part_data_1 = part_data_1.append(part_data_2[move_idx])
+    print(move_idx)
+    part_data_1 = part_data_1._append(part_data_2[move_idx])
     part_data_2 = part_data_2[~move_idx]
     return part_data_1, part_data_2
 
