@@ -70,7 +70,7 @@ ress = []
 for filenames in ["R3_wg_allres.csv", "coat_wg_allres.csv", "R3_sg_allres.csv", "coat_sg_allres.csv"]:
 
 
-	file = pd.read_csv("F:/rec/causal-recsys-public/res/"+filenames)
+	file = pd.read_csv("F:/2024Spring/5123/reprec/rec/res/"+filenames)
 
 	print('\n\n\n'+filenames)
 

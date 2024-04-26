@@ -23,49 +23,8 @@ export DATA="R3"
 
 
 
-for MODELCODEPYi in ${MODELCODEPY_SWEEP}; do
-    export MODELCODEPY=${MODELCODEPYi}${SUFFIX}
-    for DATADIRi in ${DATADIR_SWEEP}; do
-    	export DATADIR=${DIR_PREFIX}${DATADIRi}
-	    for LOCALFITDIRi in ${LOCALFITDIR_SWEEP}; do
-	    	export LOCALFITDIR=${ODIR_PREFIX}${LOCALFITDIRi}
-		    for OUTDIRi in ${OUTDIR_SWEEP}; do
-		    	export OUTDIR=${ODIR_PREFIX}${OUTDIRi}
-			    for OUTDIMi in ${OUTDIM_SWEEP}; do
-			    	export OUTDIM=${OUTDIMi}
-				    for CAUDIMi in ${CAUDIM_SWEEP}; do
-				    	export CAUDIM=${CAUDIMi}
-					    for THOLDi in ${THOLD_SWEEP}; do
-					    	export THOLD=${THOLDi}
-						    for BATCHSIZEi in ${BATCHSIZE_SWEEP}; do
-						    	export BATCHSIZE=${BATCHSIZEi}
-							    for NITERi in ${NITER_SWEEP}; do
-							    	export NITER=${NITERi}
-								    for PRIORUi in ${PRIORU_SWEEP}; do
-								    	export PRIORU=${PRIORUi}
-									    for PRIORVi in ${PRIORV_SWEEP}; do
-									    	export PRIORV=${PRIORVi}
-										    for ALPHAi in ${ALPHA_SWEEP}; do
-										    	export ALPHA=${ALPHAi}
-										    	for BINARYi in ${BINARY_SWEEP}; do
-										    		export BINARY=${BINARYi}
-										            NAME=data_${DATADIRi}_model_${MODELCODEPYi}_odim_${OUTDIM}_cdim_${CAUDIM}_th_${THOLD}_M_${BATCHSIZE}_nitr_${NITER}_pU_${PRIORU}_pV_${PRIORV}_alpha_${ALPHA}_binary_${BINARY}
-										            echo ${NAME}
-										            sbatch --job-name=${NAME} \
-										            --output=${NAME}.out \
-										            run_scripts.sh
-										        done
-	       									done
-	    								done
-									done
-								done
-							done
-						done
-					done
-				done
-			done
-		done
-	done
+for MODELCODEPY in $MODELCODEPY_SWEEP; do
+    python ${MODELCODEPY}.py --datadir ${DATADIR} --localfitdir ${LOCALFITDIR} --outdir ${OUTDIR} --outdim ${OUTDIM} --caudim ${CAUDIM} --thold ${THOLD} --batchsize ${BATCHSIZE} --niter ${NITER} --prioru ${PRIORU} --priorv ${PRIORV} --alpha ${ALPHA} --binary ${BINARY}
 done
 
 
@@ -92,48 +51,7 @@ export DATA="R3"
 
 
 
-for MODELCODEPYi in ${MODELCODEPY_SWEEP}; do
-    export MODELCODEPY=${MODELCODEPYi}${SUFFIX}
-    for DATADIRi in ${DATADIR_SWEEP}; do
-    	export DATADIR=${DIR_PREFIX}${DATADIRi}
-	    for LOCALFITDIRi in ${LOCALFITDIR_SWEEP}; do
-	    	export LOCALFITDIR=${ODIR_PREFIX}${LOCALFITDIRi}
-		    for OUTDIRi in ${OUTDIR_SWEEP}; do
-		    	export OUTDIR=${ODIR_PREFIX}${OUTDIRi}
-			    for OUTDIMi in ${OUTDIM_SWEEP}; do
-			    	export OUTDIM=${OUTDIMi}
-				    for CAUDIMi in ${CAUDIM_SWEEP}; do
-				    	export CAUDIM=${CAUDIMi}
-					    for THOLDi in ${THOLD_SWEEP}; do
-					    	export THOLD=${THOLDi}
-						    for BATCHSIZEi in ${BATCHSIZE_SWEEP}; do
-						    	export BATCHSIZE=${BATCHSIZEi}
-							    for NITERi in ${NITER_SWEEP}; do
-							    	export NITER=${NITERi}
-								    for PRIORUi in ${PRIORU_SWEEP}; do
-								    	export PRIORU=${PRIORUi}
-									    for PRIORVi in ${PRIORV_SWEEP}; do
-									    	export PRIORV=${PRIORVi}
-										    for ALPHAi in ${ALPHA_SWEEP}; do
-										    	export ALPHA=${ALPHAi}
-										    	for BINARYi in ${BINARY_SWEEP}; do
-										    		export BINARY=${BINARYi}
-										            NAME=data_${DATADIRi}_model_${MODELCODEPYi}_odim_${OUTDIM}_cdim_${CAUDIM}_th_${THOLD}_M_${BATCHSIZE}_nitr_${NITER}_pU_${PRIORU}_pV_${PRIORV}_alpha_${ALPHA}_binary_${BINARY}
-										            echo ${NAME}
-										            sbatch --job-name=${NAME} \
-										            --output=${NAME}.out \
-										            run_scripts.sh
-										        done
-	       									done
-	    								done
-									done
-								done
-							done
-						done
-					done
-				done
-			done
-		done
-	done
+for MODELCODEPY in $MODELCODEPY_SWEEP; do
+    python ${MODELCODEPY}.py --datadir ${DATADIR} --localfitdir ${LOCALFITDIR} --outdir ${OUTDIR} --outdim ${OUTDIM} --caudim ${CAUDIM} --thold ${THOLD} --batchsize ${BATCHSIZE} --niter ${NITER} --prioru ${PRIORU} --priorv ${PRIORV} --alpha ${ALPHA} --binary ${BINARY}
 done
 

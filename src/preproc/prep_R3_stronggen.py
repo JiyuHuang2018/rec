@@ -171,7 +171,6 @@ unique_sid = pd.unique(train_plays['songId'])
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((pid, i) for (i, pid) in enumerate(unique_uid))
 
-print(user2id)
 # In[17]:
 
 
