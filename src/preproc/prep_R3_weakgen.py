@@ -130,12 +130,11 @@ def get_count(tp, id):
 user_activity = get_count(tr_vd_data, 'userId')
 item_popularity = get_count(tr_vd_data, 'songId')
 
-
 # In[11]:
 
 
-unique_uid = user_activity.index 
-unique_sid = item_popularity.index 
+unique_uid = user_activity.index+1 
+unique_sid = item_popularity.index+1 
 
 # In[12]:
 
@@ -155,7 +154,6 @@ n_users, n_items
 
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((uid, i) for (i, uid) in enumerate(unique_uid))
-
 # In[15]:
 
 
@@ -183,10 +181,11 @@ with open(os.path.join(OUT_DATA_DIR, 'unique_sid.txt'), 'w') as f:
 
 
 def numerize(tp):
-    uid = list(map(lambda x: user2id[x-1], tp['userId']))
-    sid = list(map(lambda x: song2id[x-1], tp['songId']))
-    tp.loc[:, 'uid'] = uid
-    tp.loc[:, 'sid'] = sid
+    uid = list(map(lambda x: user2id[x], tp['userId']))
+    sid = list(map(lambda x: song2id[x], tp['songId']))
+    tp = tp.copy()
+    tp['uid'] = uid
+    tp['sid'] = sid
     return tp[['uid', 'sid', 'rating']]
 
 

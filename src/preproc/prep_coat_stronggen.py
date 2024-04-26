@@ -53,13 +53,13 @@ from scipy import sparse, stats
 # In[3]:
 
 
-DATA_DIR = 'F:/rec/causal-recsys-public/dat/raw/coat/'
+DATA_DIR = 'dat/raw/coat/'
 
 
 # In[4]:
 
 
-OUT_DATA_DIR = 'F:/rec/causal-recsys-public/dat/proc/coat_sg/'
+OUT_DATA_DIR = 'dat/proc/coat_sg/'
 
 
 # # coat

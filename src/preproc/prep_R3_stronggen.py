@@ -131,7 +131,7 @@ user_activity = get_count(raw_data, 'userId')
 # In[11]:
 
 
-unique_uid = user_activity.index
+unique_uid = user_activity.index+1
 
 
 # In[12]:
@@ -171,7 +171,7 @@ unique_sid = pd.unique(train_plays['songId'])
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((pid, i) for (i, pid) in enumerate(unique_uid))
 
-
+print(user2id)
 # In[17]:
 
 

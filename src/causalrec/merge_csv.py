@@ -77,16 +77,29 @@ for filenames in ["R3_wg_allres.csv", "coat_wg_allres.csv", "R3_sg_allres.csv", 
 	print('\n select by ndcg \n')
 	
 	wmfdcf = file[[fnmatch(model, "*wmf_cau_*_add") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
+	# Filtering the DataFrame
+	wmfcps = file[[fnmatch(model, "*wmf_cau_ips") for model in file["model"]]]
+
+	# Checking if the resulting DataFrame is empty
+	if not wmfcps.empty:
+		# If not empty, proceed to sort and get the last row
+		wmfcps = wmfcps.sort_values("vad_ndcg100")[["model", "test_ndcg100", "test_recall5"]].iloc[-1]
+		print(wmfcps)
+	else:
+		print("No entries match the pattern '*wmf_cau_ips'.")
+		print(filenames)
 	wmfobs = file[[fnmatch(model, "*wmf_obs*") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
 
 
 	pmfdcf = file[[fnmatch(model, "*pmf_cau_*_add") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
+	pmfcps = file[[fnmatch(model, "*pmf_cau_ips") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
 	pmfobs = file[[fnmatch(model, "*pmf_obs*") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
 
 	pfdcf = file[[fnmatch(model, "*pf_cau_*_add") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
+	pfcps = file[[fnmatch(model, "*pf_cau_ips") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
 	pfobs = file[[fnmatch(model, "*pf_obs*") for model in file["model"]]].sort_values("vad_ndcg100")[["model","test_ndcg100", "test_recall5"]].iloc[-1]
 
-	res = np.array([pmfobs, pmfdcf, pfobs, pfdcf, wmfobs, wmfdcf])
+	res = np.array([pmfobs,pmfcps, pmfdcf, pfobs,pfcps, pfdcf, wmfobs,wmfcps, wmfdcf])
 
 	np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 

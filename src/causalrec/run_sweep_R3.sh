@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 
-
 MODELCODEPY_SWEEP="wg_wmf_obs wg_wmf_cau_ips wg_wmf_cau_const_add wg_wmf_cau_user_add wg_pmf_obs wg_pmf_cau_ips wg_pmf_cau_const_add wg_pmf_cau_user_add wg_pf_obs wg_pf_cau_ips wg_pf_cau_const_add wg_pf_cau_user_add"
 DIR_PREFIX="dat/proc/"
 DATADIR_SWEEP="R3_wg"
