@@ -24,7 +24,7 @@ export DATA="R3"
 
 
 for MODELCODEPY in $MODELCODEPY_SWEEP; do
-    python ${MODELCODEPY}.py --datadir ${DATADIR} --localfitdir ${LOCALFITDIR} --outdir ${OUTDIR} --outdim ${OUTDIM} --caudim ${CAUDIM} --thold ${THOLD} --batchsize ${BATCHSIZE} --niter ${NITER} --prioru ${PRIORU} --priorv ${PRIORV} --alpha ${ALPHA} --binary ${BINARY}
+    python src/causalrec/${MODELCODEPY}.py --datadir ${DATADIR} --localfitdir ${LOCALFITDIR} --outdir ${OUTDIR} --outdim ${OUTDIM} --caudim ${CAUDIM} --thold ${THOLD} --batchsize ${BATCHSIZE} --niter ${NITER} --prioru ${PRIORU} --priorv ${PRIORV} --alpha ${ALPHA} --binary ${BINARY}
 done
 
 
@@ -52,6 +52,6 @@ export DATA="R3"
 
 
 for MODELCODEPY in $MODELCODEPY_SWEEP; do
-    python ${MODELCODEPY}.py --datadir ${DATADIR} --localfitdir ${LOCALFITDIR} --outdir ${OUTDIR} --outdim ${OUTDIM} --caudim ${CAUDIM} --thold ${THOLD} --batchsize ${BATCHSIZE} --niter ${NITER} --prioru ${PRIORU} --priorv ${PRIORV} --alpha ${ALPHA} --binary ${BINARY}
+    python src/causalrec/${MODELCODEPY}.py --datadir ${DATADIR} --localfitdir ${LOCALFITDIR} --outdir ${OUTDIR} --outdim ${OUTDIM} --caudim ${CAUDIM} --thold ${THOLD} --batchsize ${BATCHSIZE} --niter ${NITER} --prioru ${PRIORU} --priorv ${PRIORV} --alpha ${ALPHA} --binary ${BINARY}
 done
 

@@ -140,7 +140,7 @@ class PoissonMF(BaseEstimator, TransformerMixin):
     def _update(self, X, rows, cols, update_theta=True, vad=None):
         # alternating between update latent components and weights
         old_pll = -np.inf
-        for i in xrange(self.max_iter):
+        for i in range(self.max_iter):
             if update_theta:
                 self._update_users(X, rows, cols)
             self._update_items(X, rows, cols)
@@ -187,20 +187,18 @@ class PoissonMF(BaseEstimator, TransformerMixin):
         return pred_ll
 
 
-def _inner(self, beta, theta, rows, cols):
+def _inner(beta, theta, rows, cols):
     n_ratings = len(rows)
     n_components, n_users = theta.shape
-    return self.compute_data(beta, theta, rows, cols, n_components, n_users)
+    return compute_data(beta, theta, rows, cols, n_components, n_users)
 
-def compute_data(self, beta, theta, rows, cols, n_components, n_users):
+def compute_data(beta, theta, rows, cols, n_components, n_users):
     n_ratings = len(rows)
     data = np.zeros(n_ratings, dtype=np.float32)
     
     for i in range(n_ratings):
-        j_indices = np.arange(n_components)
-        beta_sub = beta[rows[i] * n_components + j_indices]
-        theta_sub = theta[j_indices * n_users + cols[i]]
-        data[i] = np.sum(beta_sub * theta_sub)
+        data[i] = np.dot(beta[rows[i], :], theta[:, cols[i]])
+    return data
 
 def _compute_expectations(alpha, beta):
     '''
