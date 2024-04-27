@@ -9,7 +9,6 @@ CREATED: 2014-03-25 02:06:52 by Dawen Liang <dliang@ee.columbia.edu>
 import sys
 import numpy as np
 from scipy import sparse, special
-import weave
 
 from sklearn.base import BaseEstimator, TransformerMixin
 
@@ -188,22 +187,20 @@ class PoissonMF(BaseEstimator, TransformerMixin):
         return pred_ll
 
 
-def _inner(beta, theta, rows, cols):
-    n_ratings = rows.size
+def _inner(self, beta, theta, rows, cols):
+    n_ratings = len(rows)
     n_components, n_users = theta.shape
-    data = np.empty(n_ratings, dtype=np.float32)
-    code = r"""
-    for (int i = 0; i < n_ratings; i++) {
-       data[i] = 0.0;
-       for (int j = 0; j < n_components; j++) {
-           data[i] += beta[rows[i] * n_components + j] * theta[j * n_users + cols[i]];
-       }
-    }
-    """
-    weave.inline(code, ['data', 'theta', 'beta', 'rows', 'cols',
-                        'n_ratings', 'n_components', 'n_users'])
-    return data
+    return self.compute_data(beta, theta, rows, cols, n_components, n_users)
 
+def compute_data(self, beta, theta, rows, cols, n_components, n_users):
+    n_ratings = len(rows)
+    data = np.zeros(n_ratings, dtype=np.float32)
+    
+    for i in range(n_ratings):
+        j_indices = np.arange(n_components)
+        beta_sub = beta[rows[i] * n_components + j_indices]
+        theta_sub = theta[j_indices * n_users + cols[i]]
+        data[i] = np.sum(beta_sub * theta_sub)
 
 def _compute_expectations(alpha, beta):
     '''

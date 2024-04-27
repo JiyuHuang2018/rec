@@ -53,18 +53,19 @@ from scipy import sparse, stats
 # In[3]:
 
 
-DATA_DIR = 'dat/raw/Webscope_R3/'
+DATA_DIR = 'dat/raw/Webscope_R3'
 
 
 # In[4]:
 
 
-OUT_DATA_DIR = 'dat/proc/R3_sg/'
+OUT_DATA_DIR = 'dat/proc/R3_sg'
 
 
 # # R3
 
 # In[5]:
+
 
 raw_data = pd.read_csv(os.path.join(DATA_DIR, 'ydata-ymusic-rating-study-v1_0-train.txt'), sep="\t", header=None, 
                        names=['userId', 'songId', 'rating'],engine="python")
@@ -76,6 +77,7 @@ test_data = pd.read_csv(os.path.join(DATA_DIR, 'ydata-ymusic-rating-study-v1_0-t
 
 
 raw_data.head(), raw_data.shape
+
 
 # In[7]:
 
@@ -131,7 +133,7 @@ user_activity = get_count(raw_data, 'userId')
 # In[11]:
 
 
-unique_uid = user_activity.index+1
+unique_uid = user_activity.index
 
 
 # In[12]:
@@ -170,6 +172,7 @@ unique_sid = pd.unique(train_plays['songId'])
 
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((pid, i) for (i, pid) in enumerate(unique_uid))
+
 
 # In[17]:
 
@@ -310,4 +313,3 @@ rand_test_data_tr.to_csv(os.path.join(OUT_DATA_DIR, 'test_tr.csv'), index=False)
 
 rand_test_data_te = numerize(rand_test_plays_te)
 rand_test_data_te.to_csv(os.path.join(OUT_DATA_DIR, 'test_te.csv'), index=False)
-

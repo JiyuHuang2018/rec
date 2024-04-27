@@ -53,13 +53,13 @@ from scipy import sparse, stats
 # In[3]:
 
 
-DATA_DIR = 'dat/raw/Webscope_R3/'
+DATA_DIR = 'dat/raw/Webscope_R3'
 
 
 # In[4]:
 
 
-OUT_DATA_DIR = 'dat/proc/R3_wg/'
+OUT_DATA_DIR = 'dat/proc/R3_wg'
 
 
 # ## R3
@@ -77,6 +77,7 @@ test_data = pd.read_csv(os.path.join(DATA_DIR, 'ydata-ymusic-rating-study-v1_0-t
 
 
 tr_vd_data.head(), tr_vd_data.shape
+
 
 # In[7]:
 
@@ -130,11 +131,13 @@ def get_count(tp, id):
 user_activity = get_count(tr_vd_data, 'userId')
 item_popularity = get_count(tr_vd_data, 'songId')
 
+
 # In[11]:
 
 
-unique_uid = user_activity.index+1 
-unique_sid = item_popularity.index+1 
+unique_uid = user_activity.index
+unique_sid = item_popularity.index
+
 
 # In[12]:
 
@@ -154,6 +157,8 @@ n_users, n_items
 
 song2id = dict((sid, i) for (i, sid) in enumerate(unique_sid))
 user2id = dict((uid, i) for (i, uid) in enumerate(unique_uid))
+
+
 # In[15]:
 
 
@@ -228,8 +233,7 @@ def move_to_fill(part_data_1, part_data_2, unique_id, key):
             left_id.append(_id)
             
     move_idx = part_data_2[key].isin(left_id)
-    print(move_idx)
-    part_data_1 = part_data_1._append(part_data_2[move_idx])
+    part_data_1 = part_data_1.append(part_data_2[move_idx])
     part_data_2 = part_data_2[~move_idx]
     return part_data_1, part_data_2
 
@@ -398,4 +402,3 @@ vad_data = load_data(os.path.join(OUT_DATA_DIR, 'validation.csv'))
 # bins = np.histogram(vad_data.data, bins=5)[0]
 # plt.bar(np.arange(1, 6), bins)
 # pass
-
